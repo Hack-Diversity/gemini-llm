@@ -1,4 +1,4 @@
-package server
+package handlers
 
 import (
 	"llm-gemini/gemini"
@@ -6,11 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func healthCheck(c *gin.Context) {
-	c.JSON(200, "^_^")
-}
-
-func filterJobPosts(c *gin.Context) {
+func FilterJobPosts(c *gin.Context) {
 	var input struct {
 		Posts []string `json:"posts"`
 		Title string   `json:"title"`
