@@ -8,10 +8,35 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 
 	"github.com/google/generative-ai-go/genai"
 	"google.golang.org/api/option"
 )
+
+/*
+Filters social media posts that are not relevant to a job search and title.
+*/
+func BuildFormula(input string) (string, error) {
+	placeHolder := `
+		You are a Google sheets formula helper. I am working on a Google sheet and I need help with a formula.
+		Below is the formula that I want to build. Please provide the formula that I need to use in the Google sheet.
+		DO NOT return code blocks or any other information, ONLY the formula.
+
+		>%s 
+	`
+	// Generate the prompt
+	prompt := fmt.Sprintf(placeHolder, input)
+
+	// Generate the content
+	res, err := generate(prompt)
+	if err != nil {
+		return "", err
+	}
+
+	// convert from bytes to string
+	return strings.TrimSpace(string(res)), nil
+}
 
 /*
 Filters social media posts that are not relevant to a job search and title.

@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Formula extension",
+  "version": "1.0",
+  "description": "",
+  "permissions": ["scripting", "activeTab"],
+  "background": {
+    "service_worker": "background.ts"
+  },
+  "action": {
+    "default_popup": "index.html"
+  },
+  "icons": {
+    "16": "vite.svg",
+    "48": "vite.svg",
+    "128": "vite.svg"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.ts"]
+    }
+  ],
+  "web_accessible_resources": [{
+    "resources": ["web_accessible_resources.js"],
+    "matches": ["<all_urls>"]
+  }]
+}
